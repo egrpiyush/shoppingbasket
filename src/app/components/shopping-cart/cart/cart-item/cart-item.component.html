@@ -1,3 +1,15 @@
 <div class=cart-item>
-    <span>{{cartItem.productName}}</span> x <span>{{cartItem.quantity}}</span>: <strong>{{ (cartItem.quantity * cartItem.price) | currency}}</strong>
+    <span>{{cartItem.productName}}</span> x <span>{{cartItem.quantity}}</span>: <strong>{{ (cartItem.quantity * cartItem.price) | currency}}</strong> 
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              (click)="onRemoveFromCart()"
+            >
+              Remove
+            </button>
+          </div>
+    </div>
+    
 </div>

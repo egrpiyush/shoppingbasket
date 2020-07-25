@@ -11,6 +11,7 @@ import { CartItemComponent } from './components/shopping-cart/cart/cart-item/car
 import { ProductComponent } from './components/shopping-cart/products/product/product.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
+import { CheckoutItemComponent } from './components/checkout/checkout-item/checkout-item/checkout-item.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PageNotFoundComponent } from './components/shared/page-not-found/page-n
     CartItemComponent,
     ProductComponent,
     CheckoutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CheckoutItemComponent
   ],
   imports: [
     BrowserModule,

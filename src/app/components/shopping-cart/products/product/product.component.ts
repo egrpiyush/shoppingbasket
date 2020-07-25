@@ -11,13 +11,13 @@ export class ProductComponent implements OnInit {
 
   @Input() productItem: Product;
 
-  constructor(private message: CartService) { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
   }
 
   onAddToCart(){
-    this.message.sendAddToCart(this.productItem);
+    this.cartService.sendAddToCart(this.productItem);
   }
 
 }
