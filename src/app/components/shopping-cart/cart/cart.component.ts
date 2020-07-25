@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '../../../services/cart/cart.service'
+import { CheckoutService } from '../../../services/checkout/checkout.service'
 import { Product } from '../../../models/product';
+import { CartItem } from '../../../models/cart-item';
 
 @Component({
   selector: 'app-cart',
@@ -9,21 +12,22 @@ import { Product } from '../../../models/product';
 })
 export class CartComponent implements OnInit {
 
-  cartItems = [
-    // {id: 1, productId:1, productName: "asa", quantity: 1, price: 10},
-    // {id: 2, productId:2, productName: "asa", quantity: 2, price: 10},
-    // {id: 3, productId:3, productName: "asa", quantity: 1, price: 10},
-    // {id: 4, productId:4, productName: "asa", quantity: 3, price: 10},
-  ];
-
+  cartItems: CartItem[] = [];
   cartTotal = 0;
 
-  constructor(private message: CartService) { }
+  constructor(private message: CartService, private checkoutService: CheckoutService, private router: Router) { }
 
   ngOnInit() {
+
+    this.cartItems = this.checkoutService.CartItems;
     this.message.getAddToCart().subscribe((product: Product) => {
       this.addToCart(product);
     });
+  }
+
+  onSubmit(){
+    this.checkoutService.CartItems = this.cartItems;
+    this.router.navigate(['/checkout']);
   }
 
   addToCart(product: Product){
@@ -38,38 +42,8 @@ export class CartComponent implements OnInit {
     }
 
     if (!productExists){
-      this.cartItems.push({
-        productId: product.id,
-        productName: product.name,
-        quantity: 1,
-        price: product.price
-      });      
+      this.cartItems.push(new CartItem(product.id, product.name, product.price, 1, product.description));     
     }
-
-    // if (this.cartItems.length === 0){
-    //   this.cartItems.push({
-    //     productId: product.id,
-    //     productName: product.name,
-    //     quantity: 1,
-    //     price: product.price
-    //   });
-    // }
-    // else{
-    //   for (let i in this.cartItems){
-    //     if(this.cartItems[i].productId === product.id){
-    //       this.cartItems[i].quantity++; 
-    //       break;
-    //     }
-    //     else{
-    //       this.cartItems.push({
-    //         productId: product.id,
-    //         productName: product.name,
-    //         quantity: 1,
-    //         price: product.price
-    //       });
-    //     }
-    //   }
-    // }
 
     this.cartItems.forEach(p => {
       this.cartTotal += (p.quantity * p.price);

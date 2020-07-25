@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InterComponentMessageService } from "../../services/inter-component-messaging-service/inter-component-message.service"
+import { CheckoutService } from '../../services/checkout/checkout.service'
+import { CartItem } from '../../models/cart-item';
 
 @Component({
   selector: 'app-checkout',
@@ -7,10 +8,19 @@ import { InterComponentMessageService } from "../../services/inter-component-mes
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  
+  cartItems: CartItem[] = [];
+  cartTotal = 0;
+  deliveryFee = 0;
+  constructor(private checkoutService: CheckoutService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log(this.checkoutService.CartItems);
+    this.cartItems = this.checkoutService.CartItems;
+    this.cartItems.forEach(p => {
+      this.cartTotal += (p.quantity * p.price);
+    })
+    this.cartTotal += this.deliveryFee;
   }
 
 }

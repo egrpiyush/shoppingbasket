@@ -1,4 +1,24 @@
-<ul class="list-group">
+<div class="card">
+    <div class="card-body">
+        <p class="card-text" *ngIf="cartItems.length > 0">
+            <strong>You have items in shopping basket.</strong>        
+        </p>
+        <p class="card-text" *ngIf="cartItems.length === 0">
+            <strong>Your shopping basket is empty.</strong>        
+        </p>        
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group" *ngIf="cartItems.length > 0">
+              <button
+                type="button"
+                class="btn btn-primary btn-block" (click)="onSubmit()">
+                Go to Basket
+              </button>
+            </div>
+          </div>       
+    </div>
+</div>
+
+<!-- <ul class="list-group">
     <li class="list-group-item" *ngFor="let item of cartItems">
         <app-cart-item [cartItem]="item"></app-cart-item>
     </li>
@@ -6,4 +26,4 @@
     <li class="list-group-item active">
         <strong>Total</strong> {{ cartTotal | currency }}
     </li>
-</ul>
+</ul> -->
