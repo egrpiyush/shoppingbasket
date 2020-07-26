@@ -12,6 +12,7 @@ import { ProductComponent } from './components/shopping-cart/products/product/pr
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { CheckoutItemComponent } from './components/checkout/checkout-item/checkout-item/checkout-item.component';
+import { ThankYouComponent } from './components/shared/thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CheckoutItemComponent } from './components/checkout/checkout-item/check
     ProductComponent,
     CheckoutComponent,
     PageNotFoundComponent,
-    CheckoutItemComponent
+    CheckoutItemComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule,

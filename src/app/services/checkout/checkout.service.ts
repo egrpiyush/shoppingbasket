@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { Subject } from 'rxjs'
 import { CartItem } from '../../models/cart-item';
 import { deliveryFeeUrl } from '../../config/apiUrl'
+import { placeOrderUrl } from '../../config/apiUrl'
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,13 @@ export class CheckoutService {
   subject = new Subject();
   constructor(private http: HttpClient) { }
 
-  // sendCheckoutCart(cartItems: string){
-  //   this.subject.next(cartItems);
-  // }
-
-  // getCheckoutCart(){
-  //   return this.subject.asObservable();
-  // }
-
   getDeliveryFee(cartTotal: number): Observable<number>{
     let params = new HttpParams().set("cartTotal", cartTotal.toString());
     return this.http.get<number>(deliveryFeeUrl, { params: params });
+  }
+
+  placeOrder(cartItems: CartItem[]){
+    return this.http.post(placeOrderUrl, cartItems);
   }
 
   sendRemoveFromCart(cartItem){
